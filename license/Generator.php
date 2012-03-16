@@ -17,6 +17,7 @@ class Generator extends BaseGenerator
                 'PHP License' => 'PHP',
                 'Zend License' => 'ZEND',
                 'GPL2 License' => 'GPL2',
+                'BSD License' => 'BSD',
             ));
         }
 
