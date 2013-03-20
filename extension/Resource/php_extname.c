@@ -4,7 +4,7 @@
 #include "php.h"
 #include "php_{{ extname }}.h"
 
-static function_entry {{ extname }}_functions[] = {
+static zend_function_entry {{ extname }}_functions[] = {
     PHP_FE({{extname}}_test, NULL)
     {NULL, NULL, NULL}
 };
@@ -14,16 +14,18 @@ zend_module_entry {{extname}}_module_entry = {
     STANDARD_MODULE_HEADER,
 #endif
     PHP_{{extname_uc}}_EXTNAME,
-    {{extname}}_functions,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
+    {{extname}}_functions, // zend_function_entry
+    NULL,   // PHP_MINIT({{extname}}) 
+    NULL,   // 
+    NULL,   // PHP_RINIT({{extname}})
+    NULL,   // PHP_RSHUTDOWN({{extname}})
+    NULL,   // PHP_MINFO({{extname}})
 #if ZEND_MODULE_API_NO >= 20010901
-    PHP_{{extname_uc}}_VERSION,
+    PHP_{{extname_uc}}_VERSION,  // your extension version
 #endif
-    STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_PROPERTIES, // PHP_MODULE_GLOBALS({{extname}}),
+    NULL,    // PHP_GINIT({{ extname }})
+    NULL    // TODO
 };
 
 #ifdef COMPILE_DL_{{extname_uc}}
@@ -34,3 +36,5 @@ PHP_FUNCTION({{extname}}_test)
 {
     RETURN_STRING("Hello World", 1);
 }
+
+
