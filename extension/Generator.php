@@ -36,7 +36,6 @@ class Generator extends BaseGenerator
 
         $this->render( 'php_extname.h' , "php_$name.h" , $args );
         $this->render( 'php_extname.c' , "php_$name.c" , $args );
-        $this->render( 'test.php' , 'test.php' , $args );
-        $this->render( 'test-extension.sh' , 'test-extension.sh' , $args );
+        $this->copy( '.gitignore' , '.gitignore' );
     }
 }
